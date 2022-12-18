@@ -15,15 +15,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-public class FileActions {
+public class FileOperations {
     private GUI UI;
-    public FileActions(GUI UI) {
+    public FileOperations(GUI UI) {
         this.UI = UI;
     }
 
 
 
-    public void savingFile(ArrayList<TableHeaders> tableHeaders) {
+    public void saveFile(ArrayList<TableHeaders> tableHeaders) {
         File headerF;
         File lineF;
         String invoices = "";
@@ -41,7 +41,7 @@ public class FileActions {
             }
         }
 
-        JOptionPane.showMessageDialog(UI, "Please select the Headers f then Lines f");
+        JOptionPane.showMessageDialog(UI, "Please select the Headers file then Lines file");
         JFileChooser f = new  JFileChooser();
         do{
             result = f.showSaveDialog(UI);
@@ -55,17 +55,17 @@ public class FileActions {
                         headFileWriter.flush();
                         break;
                     } catch (IOException ex) {
-                        Logger.getLogger(FileActions.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(FileOperations.class.getName()).log(Level.SEVERE, null, ex);
                     } finally {
                         try {
                             headFileWriter.close();
                         } catch (IOException ex) {
-                            Logger.getLogger(FileActions.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(FileOperations.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                 }
                 else{
-                    System.out.println("Wrong Headers File Format");
+                    System.out.println("Wrong Lines File Format");
                     JOptionPane.showMessageDialog(UI, "Wrong Headers File Format");
                 }
             }
@@ -84,17 +84,18 @@ public class FileActions {
                         lineFileWriter.flush();
                         break;
                     } catch (IOException ex) {
-                        Logger.getLogger(FileActions.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(FileOperations.class.getName()).log(Level.SEVERE, null, ex);
                     } finally {
                         try {
                             lineFileWriter.close();
                         } catch (IOException ex) {
-                            Logger.getLogger(FileActions.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(FileOperations.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                 }
             }
             else{
+
                 JOptionPane.showMessageDialog(UI, "Wrong Lines File Format");
             }
         }while(true);
@@ -111,7 +112,7 @@ public class FileActions {
 
 
 
- public ArrayList<TableHeaders> loadingFile(){
+ public ArrayList<TableHeaders> ReadFile(){
 
         List<String> headerLines=null;
         String headerPath;
@@ -134,7 +135,8 @@ public class FileActions {
                     break;
                 }
                 else{
-                 JOptionPane.showMessageDialog(UI, "Wrong Headers File Format please select the headers f again");
+                    System.out.println("Wrong Headers File Format");
+                    JOptionPane.showMessageDialog(UI, "Wrong Headers File Format please select the headers file again");
                 }
             }
             }while(true);
@@ -148,7 +150,8 @@ public class FileActions {
                         break;
                     }
                     else{
-                 JOptionPane.showMessageDialog(UI, "Wrong Items File Format");
+                        System.out.println("Wrong Items File Format");
+                        JOptionPane.showMessageDialog(UI, "Wrong Items File Format");
                 }
 
                 }
@@ -162,14 +165,15 @@ public class FileActions {
                 headerLines = Files.lines(Paths.get(headerPath)).collect(Collectors.toList());
             } catch (IOException ex) {
 
-                 JOptionPane.showMessageDialog(UI, "Wrong Headers File Path");
+                System.out.println("Wrong Headers File Path");
+                JOptionPane.showMessageDialog(UI, "Wrong Headers File Path");
             }
 
                 
             try {
                 itemLines = Files.lines(Paths.get(itemPath)).collect(Collectors.toList());
             } catch (IOException ex) {
-
+                System.out.println("Wrong Items File Path");
                  JOptionPane.showMessageDialog(UI, "Wrong Items File Path");
             }
             

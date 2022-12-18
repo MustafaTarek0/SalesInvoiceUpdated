@@ -5,7 +5,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import Actions.InvoiceActions;
 import Actions.TableElements;
-import Elements.FileActions;
+import Elements.FileOperations;
 import Elements.InvoiceTable;
 import Elements.TableHeaders;
 
@@ -295,8 +295,8 @@ public class GUI extends JFrame{
                     throw new RuntimeException(e);
                 }
                 frame.setVisible(true);
-                FileActions fileActions = new FileActions(frame);
-                ArrayList<TableHeaders> inv= fileActions.loadingFile();
+                FileOperations fileOperations = new FileOperations(frame);
+                ArrayList<TableHeaders> inv= fileOperations.ReadFile();
                 frame.setInvoices(inv);
                 InvoiceTable invoiceTable = new InvoiceTable(inv);
                 frame.setHeaderTable(invoiceTable);

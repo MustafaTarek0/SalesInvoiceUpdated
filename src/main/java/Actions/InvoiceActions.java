@@ -1,7 +1,7 @@
 package Actions;
 
 
-import Elements.FileActions;
+import Elements.FileOperations;
 import Elements.InvoiceTable;
 import Elements.LineTable;
 import Elements.TableHeaders;
@@ -57,8 +57,8 @@ public class InvoiceActions implements ActionListener, ListSelectionListener {
             case "Open File":
 
                 UI.setInvoices(null);
-                FileActions Actions = new FileActions(UI);
-                ArrayList<TableHeaders> inv= Actions.loadingFile();
+                FileOperations Actions = new FileOperations(UI);
+                ArrayList<TableHeaders> inv= Actions.ReadFile();
                 UI.setInvoices(inv);
                 InvoiceTable invoiceTable = new InvoiceTable(inv);
                 UI.setHeaderTable(invoiceTable);
@@ -66,9 +66,9 @@ public class InvoiceActions implements ActionListener, ListSelectionListener {
                 UI.getHeaderTable().fireTableDataChanged();
                 break;
 
-            case "Load File":
-                FileActions Actions1 = new FileActions(UI);
-                Actions1.savingFile(UI.getInvoicesList());
+            case "Save File":
+                FileOperations Actions1 = new FileOperations(UI);
+                Actions1.saveFile(UI.getInvoicesList());
                 break;
 
 
